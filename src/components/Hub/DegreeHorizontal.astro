@@ -1,0 +1,138 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface DegreeData {
+  title: string;
+  duration: string;
+  description: string;
+  campus: string[];
+}
+
+interface DegreeHorizontalProps {
+  data: DegreeData;
+}
+
+const { data } = Astro.props as DegreeHorizontalProps;
+const { title, duration, description, campus } = data;
+---
+
+<li>
+  <a href="" class="programme-row">
+
+  <div class="line"></div>
+
+  <div class="left">
+
+    <div class="col-1">
+      <div class="title-wrapper">
+        <h2 class="headline-lg color-white">{title}</h2>
+        <div>
+          <span class="headline-md">[</span>
+          <span class="headline-md span-strong">{duration}</span>
+          <span class="headline-md">]</span>
+        </div>
+
+      </div>
+        <p class="body-md">{description}</p>
+    </div>
+
+      <div class="col-2">
+        {
+          campus.map((camp) => (
+            <div class="tag">{camp} <Icon name="icon--arrow"/></div>
+          ))
+        }
+   </div>
+  </div>
+
+    <!-- <Icon name="icon--arrow-thin" size={48} /> -->
+
+  </a>
+</li>
+
+<style>
+  
+  
+  .programme-row {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;  
+    color: var(--color-purple-200);
+    gap: var(--space-m);
+    border-top: 2px solid var(--color-muted-700);
+    padding-top: var(--space-s);
+    padding-bottom: var(--space-2xl);
+    align-items: top;
+    cursor;
+  }
+
+
+  .line {
+    height: 2px;
+    position: absolute;
+    width: 0%;
+    background-color: var(--color-white);
+    transition: width 0.3s;
+    top: 0;
+    left: 0;
+  }
+
+
+  .title-wrapper {
+    display: inline-flex;
+    gap: var(--space-xs);
+    
+    align-items: center;
+    span {
+      font-weight: var(--font-light);
+      color: var(--color-purple-600);
+    }
+
+    .span-strong {
+      color: var(--color-purple-300);
+    }
+  }
+
+  .left {
+    width: 100%;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: var(--space-xs);
+
+    @media screen and (max-width: 810px) {
+      flex-direction: column;
+      
+    }
+  }
+
+  .col-1 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xs);
+    align-items: flex-start;
+  }
+
+  .col-2 {
+    display: flex;
+    gap: var(--space-3xs);
+    align-items: center;
+
+  }
+
+  .tag {
+    font-size: var(--font-size-s);
+
+    padding: var(--space-2xs) var(--space-xs);
+    /* background-color: var(--color-muted-700); */
+    border: 1px solid var(--color-muted-700);
+    border-radius: 100px;
+    color: var(--color-purple-100);
+    justify-self: start;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+  }
+</style>

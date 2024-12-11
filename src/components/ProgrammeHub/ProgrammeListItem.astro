@@ -1,0 +1,82 @@
+---
+import { Icon } from "astro-icon/components";
+import Image from "astro/components/Image.astro";
+import CampusButton from "./CampusButton.astro";
+
+
+interface ProgrammeData {
+  title: string;
+  description: string;
+  campus: string[];
+  image: ImageMetadata;
+}
+interface ProgrammeListItemProps {
+  data: ProgrammeData;
+}
+
+const {data} = Astro.props as ProgrammeListItemProps;
+const {title, description, campus, image} = data;
+
+---
+
+<li>
+  <div class="left-content">
+    <h3 class="headline-xl">{title}</h3>
+    <p class="body-md">{description}</p>
+    <div class="campus-wrapper">
+      {
+        campus.map((camp) => (
+          <CampusButton campus={camp} />
+        ))
+      }
+    </div>
+  </div>
+  <Image class="icon" src={image} alt="dummy text" width={112}  format="svg"/>
+
+</li>
+
+<style>
+  li {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-l) 0 var(--space-l) 0;
+    gap: var(--space-l);
+  }
+
+  @media (max-width: 1200px) {
+    li {
+      flex-direction: column-reverse;
+      padding: var(--space-s) 0 var(--space-xl) 0;
+      gap: var(--space-xs);
+    }
+
+    .icon {
+      width: 88px;
+    }
+
+  }
+
+  li:not(:first-child) {
+    border-top: 1px solid var(--color-purple-700);
+  }
+
+  p {
+    color: var(--color-purple-200);
+    padding-top: var(--space-3xs);
+    padding-bottom: var(--space-s);
+  }
+
+  .left-content {
+    display: flex;
+    flex-direction: column;
+  }
+  .campus-wrapper {
+    display: flex;
+    gap: var(--space-2xs);
+  }
+
+  .icon {
+    opacity: 50%;
+  }
+
+</style>

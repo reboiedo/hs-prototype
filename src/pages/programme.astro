@@ -1,0 +1,122 @@
+---
+import Card from "../components/Card.astro";
+import ProgrammeHero from "../components/ProgrammeHero.astro";
+import SideCard from "../components/SideCard.astro";
+import ScrollSection from "../components/ScrollSection.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+
+---
+
+<BaseLayout title="Programme">
+
+<ProgrammeHero/>
+
+<section class="normal-section">
+  <div class="container-scroll">
+
+    <SideCard/>
+
+    <!-- Scroll Starts here -->
+    <div class="scroll">
+
+      <ScrollSection
+        eyebrow="overview"
+        number="01"
+        heading="Programme Overview"
+        paragraph="Designed with future leaders in mind, the programme offers a solid  foundation in general management coupled with vital real-world  experiences. Enhance your global perspective through a study term abroad and apply your academic learning during a meaningful internship.  Prepare to distinguish yourself in the competitive global business  landscape.">
+        
+        <div class="two-column">
+          <Card 
+            title="Master" 
+            paragraph="Choosing to study a bachelor's is a big step and commitment. At Harbour.Space University, we offer two study modes to fit different goals and paces." 
+            point1="1 Year to Complete" 
+            point2="90 ECTS" 
+            point3="Optional Internship" 
+            point4="Double Diploma with UTCC + Harbour.Space"
+          />
+
+          <Card 
+            title="Applied Master" 
+            paragraph="Choosing to study a bachelor's is a big step and commitment. At Harbour.Space University, we offer two study modes to fit different goals and paces." 
+            point1="1 Year to Complete" 
+            point2="90 ECTS" 
+            point3="Optional Internship" 
+            point4="Double Diploma with UTCC + Harbour.Space"
+          />
+        </div>
+      </ScrollSection>
+
+      <ScrollSection
+        eyebrow="overview"
+        number="02"
+        heading="Accreditation"
+        paragraph="Choosing to study a bachelor's is a big step and commitment. At Harbour.Space University, we offer two study modes to fit different goals and paces.">
+        <div class="two-column">
+          <div class="box"></div>
+          <div class="box"></div>
+          <div class="box"></div>
+        </div>
+      </ScrollSection>
+
+      <ScrollSection
+        eyebrow="Teaching Approach"
+        number="03"
+        heading="Designed to see the previously impossible."
+        paragraph="Choosing to study a bachelor's is a big step and commitment. At Harbour.Space University, we offer two study modes to fit different goals and paces.">
+      </ScrollSection>
+    </div>
+  </div>
+</section>
+</BaseLayout>
+
+
+
+
+<style>
+
+.normal-section {
+  padding: var(--space-xl-3xl) var(--space-s-m);
+}
+
+.container {
+  margin: auto;
+  display: flex;
+  max-width: 1824px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+  
+  .container-scroll {
+    display: flex;
+    gap: var(--space-gap);
+    flex-direction: row;
+    max-width: 1824px;
+    margin: auto;
+    justify-items: top;
+  }
+  
+  .scroll {
+
+    align-items: center;
+  }
+
+  .two-column {
+    display: flex;
+    gap: var(--space-xs);
+    
+    @media screen and (max-width: 810px) {
+      flex-direction: column;
+    }
+  }
+
+  .box {
+    background-color: var(--color-purple-50);
+    height: 300px;
+    width: 100%;
+  }
+
+  
+
+</style>

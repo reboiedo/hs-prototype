@@ -1,0 +1,55 @@
+---
+import { Icon } from "astro-icon/components";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import NavBar from "../components/Menu/NavBar.astro";
+
+
+---
+
+<BaseLayout>
+  <NavBar />
+  <section>
+
+    <h1 class="headline-5xl">This is a Fancy Page</h1>
+    
+    
+  
+  </section>
+  <section class="purple">
+
+    <h1 class="headline-5xl">This is a Fancy Page</h1>
+    
+    
+  
+  </section>
+  <section>
+
+    <h1 class="headline-5xl">This is a Fancy Page</h1>
+    
+    
+  
+  </section>
+</BaseLayout>
+
+
+<script>
+
+
+</script>
+
+<style>
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.purple {
+  background-color: var(--color-purple-800);
+  color: var(--color-white);
+}
+
+</style>

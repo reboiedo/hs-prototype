@@ -1,0 +1,23 @@
+---
+import { Icon } from "astro-icon/components";
+
+---
+
+<div class="menu-top">
+  <Icon name="logo--white" />
+  <div class="action-group">
+    <button>close</button>
+  </div>
+</div>
+
+<style>
+  .menu-top {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: var(--space-s-m);
+    border-bottom: 1px solid var(--color-purple-700);
+    height: 72px;
+    align-items: center;
+    grid-area: nav;
+  }
+</style>

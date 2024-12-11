@@ -1,0 +1,121 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface DegreeData {
+  title: string;
+  duration: string;
+  description: string;
+  campus: string[];
+}
+
+interface DegreeHorizontalProps {
+  data: DegreeData;
+}
+
+const { data } = Astro.props as DegreeHorizontalProps;
+const { title, duration, description, campus } = data;
+---
+
+<li>
+  <a href="" class="programme-row">
+
+  <div class="left">
+
+    <div class="col-1">
+      <div class="title-wrapper">
+        <h2 class="headline-lg color-white">{title}</h2>
+        <span class="headline-md">/</span>
+        <span class="headline-md">{duration}</span>
+      </div>
+        <p class="body-md">{description}</p>
+    </div>
+
+      <div class="col-2">
+        {
+          campus.map((camp) => (
+            <div class="tag">{camp}</div>
+          ))
+        }
+   </div>
+  </div>
+
+    <Icon name="icon--arrow-thin" size={48} />
+
+  </a>
+</li>
+
+<style>
+  
+  
+  .programme-row {
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;  
+    color: var(--color-purple-200);
+    gap: var(--space-m);
+    border-top: 2px solid var(--color-muted-700);
+    padding-block: var(--space-m);
+    align-items: center;
+  }
+
+  .programme-row:hover {
+    h2 {
+      color: var(--color-white);
+      text-decoration: underline;
+    }
+
+    .tag {
+      color: var(--color-white);
+    }
+  }
+
+
+  .title-wrapper {
+    display: inline-flex;
+    gap: var(--space-3xs);
+    
+    align-items: center;
+    span {
+      font-weight: var(--font-light);
+      color: var(--color-purple-400);
+    }
+
+  }
+
+  .left {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: var(--space-xs);
+
+    @media screen and (max-width: 810px) {
+      flex-direction: column;
+      
+    }
+  }
+
+  .col-1 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+  }
+
+  .col-2 {
+    display: flex;
+    gap: var(--space-3xs);
+    align-items: center;
+
+  }
+
+  .tag {
+    font-size: var(--font-size-xs);
+
+    padding: var(--space-3xs) var(--space-2xs);
+    /* background-color: var(--color-muted-700); */
+    border: 1px solid var(--color-white-25);
+    border-radius: var(--space-3xs);
+    color: var(--color-purple-100);
+    justify-self: start;
+  }
+</style>

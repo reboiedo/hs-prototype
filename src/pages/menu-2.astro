@@ -1,0 +1,225 @@
+---
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import MenuSecondLevel from "../components/Menu/MenuSecondLevel.astro";
+import MenuFirstLevel from "../components/Menu/MenuFirstLevel.astro";
+import MenuSecondaryActions from "../components/Menu/MenuSecondaryActions.astro";
+import MenuTop from "../components/Menu/MenuTop.astro";
+
+
+---
+
+<BaseLayout>
+  <nav class="menu">
+    <MenuTop/>
+    <div class="menu-main">
+      <ul class="menu-list">
+        <li class="menu-item">
+          <MenuFirstLevel title="Studies" aria-controls="studies-submenu"/>
+          <ul class="sub-item" id="studies-submenu">
+            <MenuSecondLevel title="Bachelors"/>
+            <MenuSecondLevel title="Masters"/>
+            <MenuSecondLevel title="Foundation Year"/>
+            <MenuSecondLevel title="Open University"/>
+            <MenuSecondLevel title="Areas of Study" third="true"/>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <MenuFirstLevel title="Admissions" aria-controls="admissions-submenu"/>
+          <ul class="sub-item" id="admissions-submenu">
+            <MenuSecondLevel title="How to Apply"/>
+            <MenuSecondLevel title="Scholarships"/>
+            <MenuSecondLevel title="Work & Study Opportunities"/>
+            <MenuSecondLevel title="Contact Admissions"/>
+            <MenuSecondLevel title="Book a Visit"/>
+            <MenuSecondLevel title="Apply now"/>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <MenuFirstLevel title="The School" aria-controls="school-submenu"/>
+          <ul class="sub-item" id="school-submenu">
+            <MenuSecondLevel title="About Harbour.Space"/>
+            <MenuSecondLevel title="Faculty"/>
+            <MenuSecondLevel title="Barcelona Campus"/>
+            <MenuSecondLevel title="Bangkok Campus"/>
+            <MenuSecondLevel title="Alumni"/>
+            <MenuSecondLevel title="Sobre Nosotros"/>
+            <MenuSecondLevel title="Sobre Nosaltres"/>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <MenuFirstLevel title="Explore" aria-controls="explore-submenu"/>
+          <ul class="sub-item" id="explore-submenu">
+            <MenuSecondLevel title="Blog"/>
+            <MenuSecondLevel title="Podcast"/>
+            <MenuSecondLevel title="FAQ"/>
+            <MenuSecondLevel title="Leagues of Code"/>
+          </ul>
+      </li>
+      </ul>
+      <MenuSecondaryActions />
+    </div>
+  </nav>
+</BaseLayout>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const menuItems = document.querySelectorAll('.menu-item > .menu--item-header');
+
+  const showFirstMenuItem = () => {
+    const firstItem = menuItems[0];
+    firstItem.setAttribute('aria-expanded', 'true');
+    const subItem = firstItem.nextElementSibling as HTMLElement | null;
+    if (subItem) {
+      subItem.style.display = 'block';
+      subItem.setAttribute('aria-hidden', 'false');
+    }
+  };
+
+  const hideAllSubmenus = () => {
+    menuItems.forEach(i => {
+      i.setAttribute('aria-expanded', 'false');
+      const subItem = i.nextElementSibling as HTMLElement | null;
+      if (subItem) {
+        subItem.style.display = 'none';
+        subItem.setAttribute('aria-hidden', 'true');
+      }
+    });
+  };
+
+  menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const isExpanded = item.getAttribute('aria-expanded') === 'true';
+
+      // If the clicked item is already expanded, do nothing
+      if (isExpanded && window.innerWidth >= 768) {
+        return;
+      }
+
+      // Hide all submenus
+      hideAllSubmenus();
+
+      // Show the clicked submenu
+      item.setAttribute('aria-expanded', 'true');
+      const subItem = item.nextElementSibling as HTMLElement | null;
+      if (subItem) {
+        subItem.style.display = 'block';
+        subItem.setAttribute('aria-hidden', 'false');
+      }
+    });
+  });
+
+  // Ensure the first menu item is always shown on desktop
+  if (window.innerWidth >= 768) {
+    showFirstMenuItem();
+  }
+  
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+      showFirstMenuItem();
+    } else {
+      hideAllSubmenus();
+    }
+  });
+});
+</script>
+
+<style>
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .menu {
+    position: fixed;
+    width: 100%;
+    background-color: var(--color-purple-800);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "nav"
+      "content";
+    min-height: 100dvh;
+  }
+
+  .menu-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    /* padding: var(--space-xl) var(--space-s-m) 0 var(--space-s-m); */
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .menu-main {
+    display: flex;
+    grid-area: content;
+    flex-direction: column;
+    height: 100%;
+    overflow: scroll;
+    justify-content: space-between;
+  }
+
+  .menu-item {
+    border-bottom: 1px solid var(--color-purple-700);
+  }
+
+  .sub-item {
+    display: none;
+    flex-direction: column;
+    list-style-type: none;
+    justify-content: space-between;
+    overflow-y: scroll;
+    padding-inline: var(--space-s-m);
+    padding-bottom: var(--space-xl);
+
+  }
+
+
+  @media (min-width: 768px) {
+    .menu {
+      grid-template-columns: 1fr 1.5fr;
+      grid-template-areas:
+        "nav nav"
+        "content right"
+        "footer right";
+      height: 100vh;
+
+    }
+
+    .menu-list {
+      grid-area: left;
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-xl) var(--space-s-m) 0 var(--space-s-m);
+
+    }
+
+    .menu-main {
+      grid-area: content;
+      border-right: var(--color-purple-700) 1px solid; 
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .menu-item {
+      border-bottom: none;
+      padding: 0;
+    }
+
+    .sub-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    grid-area: right;
+    padding: var(--space-xl) var(--space-xl);
+
+    }
+
+  }
+  
+</style>

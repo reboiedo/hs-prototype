@@ -1,0 +1,50 @@
+---
+import { Icon } from "astro-icon/components";
+import ApplyButton from "./ApplyButton.astro";
+import NavBody from "./NavBody.astro";
+import MenuOpenButton from "./MenuOpenButton.astro";
+
+
+---
+
+<header>
+  <div class="nav-wrapper">
+    <Icon name="mdi:menu" class="menu-icon" />
+    <div class="right">
+      <ApplyButton>Apply now</ApplyButton>
+      <MenuOpenButton />
+      <NavBody />
+      
+    </div>
+  </div>
+</header>
+
+<style>
+  
+    :root {
+      /* background-color: #111;
+      color: #fff; */
+    }
+    
+
+    .right
+    {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2xs);
+    }
+
+    header {
+      width: 100%;
+      border-bottom: 1px solid var(--color-purple-700);
+    }
+
+  .nav-wrapper {
+    display: flex;
+    height: 72px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--space-s-m);
+  }
+
+</style>

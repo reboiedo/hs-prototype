@@ -1,0 +1,76 @@
+---
+import { Icon } from "astro-icon/components";
+
+
+---
+
+<div class="wrapper-secondary-actions">
+  <ul class="secondary-actions">
+    <li class="body-md menu--secondary-action"><a href="#">Login</a></li>
+    <li class="body-md menu--secondary-action"><a href="#">Schedule 2024</a></li>
+    <li class="body-md menu--secondary-action"><a href="#">Contact</a></li>
+  </ul>
+  <!-- <ul class="social-icons body-md">
+    <li class="social-icon">Follow us</li>
+    <li class="social-icon"><a href="#"><Icon name="mdi:instagram"/></a></li>
+    <li class="social-icon"><a href="#"><Icon name="mdi:youtube"/></a></li>
+    <li class="social-icon"><a href="#"><Icon name="mdi:facebook"/></a></li>
+    <li class="social-icon"><a href="#"><Icon name="mdi:spotify"/></a></li>
+  </ul> -->
+</div>
+
+<style>
+
+  a {
+    text-decoration: none;
+    color: white;
+    list-style: none;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .wrapper-secondary-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    grid-area: footer;
+    gap: var(--space-m);
+    padding: var(--space-xl) var(--space-s-m);
+    width: 100%;
+  }
+
+  .secondary-actions {
+    display: flex;
+    flex-direction: row;
+    color: var(--color-purple-400);
+    padding: 0;
+    gap: var(--space-m);
+  }
+
+
+  .social-icons {
+    display: flex;
+    gap: var(--space-xs);
+  }
+
+  .social-icon {
+    display: flex;
+    /* padding: var(--space-xs); */
+    /* border-radius: 100%; */
+    /* border: 1px solid var(--color-purple-700); */
+    color: white;
+  }
+
+  @media (min-width: 768px) {
+    .wrapper-secondary-actions {
+      align-items: right;
+      padding-inline: var(--space-3xl);
+    }
+
+  }
+
+</style>

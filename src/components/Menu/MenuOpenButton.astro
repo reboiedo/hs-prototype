@@ -1,0 +1,48 @@
+---
+import { Icon } from "astro-icon/components";
+
+
+---
+
+<button aria-expanded="false" aria-controls="nav" id="button-menu">
+  <span>Menu</span>
+  <div class="icon-wrapper">
+    <Icon name="mdi:close" class="menu-icon body-md" />
+  </div>
+</button>
+
+<script>
+
+
+
+
+</script>
+
+<style>
+
+  button {
+    position: relative;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    gap: var(--space-2xs);
+    overflow: hidden;
+  }
+
+  .icon-wrapper {
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-purple-700);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  
+
+</style>

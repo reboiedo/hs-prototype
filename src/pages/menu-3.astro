@@ -1,0 +1,34 @@
+
+---
+import MenuNav from "../components/Menu/MenuNav.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+
+---
+
+<BaseLayout>
+<MenuNav/>
+<section>
+  <h1>Menu 3</h1>
+  <p>This is the third menu page</p>
+</section>
+
+
+</BaseLayout>
+
+<style>
+  body {
+    
+  }
+
+
+  section {
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+</style>

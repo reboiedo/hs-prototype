@@ -1,0 +1,45 @@
+---
+const { title, paragraph, point1, point2, point3, point4 } = Astro.props;
+---
+
+<div class="card">
+  <h3 class="headline-xl">{title}</h3>
+  <p class="body-sm">{paragraph}</p>
+  <ul class ="body-sm">
+    <li>{point1}</li>
+    <li>{point2}</li>
+    <li>{point3}</li>
+    <li>{point4}</li>
+  </ul>
+  <p class="body-xs caption">this is just a small caption</p>
+</div>
+
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-m);
+    border: 1px solid var(--color-gray-200);
+    margin-bottom: var(--space-md);
+  }
+
+  .card ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .card li {
+    padding: var(--space-xs) 0;
+    border-top: 1px solid var(--color-gray-200);
+  }
+
+  .card li:first-child {
+    border-top: none;
+  }
+
+  .card .caption {
+    color: var(--color-gray-400);
+  }
+</style>

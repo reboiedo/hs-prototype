@@ -1,0 +1,122 @@
+---
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+
+const { title, link="#", third="false" } = Astro.props;
+const areasOfStudy = await getCollection("programmes");
+---
+
+<li>
+  <a class="body-lg menu--second-level" href={link} aria-expanded="false" aria-controls="third-level-menu">
+    <span>{title}</span>
+    {third === "true" && (
+      <Icon name="mdi:plus" class="open-icon" />
+    )}
+  </a>
+  {third === "true" && (
+    <ul id="third-level-menu" class="menu--third-level-list">
+      {areasOfStudy.map(({data}) => (
+        <li>
+          <a class="body-md menu--third-level" href="#">{data.title}</a>
+        </li>
+      ))}
+    </ul>
+  )}
+</li>
+
+<script>
+  import gsap from "gsap";
+
+  const dropdown = document.querySelectorAll('.menu--second-level');
+  const thirdLevel = document.querySelectorAll('.menu--third-level');
+
+
+
+  function toggleMenu(this: HTMLAnchorElement) {
+    const menu = this.nextElementSibling;
+
+
+
+
+    const tlOpen = gsap.timeline({paused: true})
+    .to('.menu--third-level-list', {height: "auto", duration: 0.6, ease: "power2.out"})
+    .to('.menu--third-level', {opacity: 1, duration: 0.1, ease: "power2.out", stagger: { each: 0.05, from: "start", ease: "lineal"}}, 0);
+  
+    const tlClose = gsap.timeline({paused: true})
+    .to('.menu--third-level-list', {height: 0, duration: 0.2, ease: "power2.out"})
+    .to('.menu--third-level', {opacity: 0, duration: 0.2, ease: "power2.out"});
+
+
+    if(menu) {
+      this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+      if(this.getAttribute('aria-expanded') === 'true') {
+        console.log('open');
+        tlOpen.restart();
+      } else {
+        console.log('close');
+        tlClose.play();
+      }
+  }
+}
+
+  dropdown.forEach(element => {
+    element.addEventListener('click', toggleMenu);
+  });
+</script>
+
+<style>
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  a {
+    text-decoration: none;
+  }
+
+  .menu--second-level {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xs) 0;
+    gap: var(--space-xs);
+    color: var(--color-purple-100); 
+  }
+
+  .menu--third-level {
+    color: var(--color-purple-300);
+    opacity: 0;
+    display: block;
+    transition-behavior: allow-discrete;
+
+
+  }
+
+  .menu--third-level-list {
+    height: 0;
+    overflow: hidden;
+    padding-left: var(--space-2xs);
+    margin: 0;
+  }
+
+  .menu--third-level:hover {
+    color: var(--color-white);
+  }
+
+
+
+  @media(min-width: 768px) {
+    .menu--second-level {
+      color: var(--color-white);
+    }
+
+    .menu--second-level:hover {
+      text-decoration: underline;
+      text-decoration-color: linear-gradient(to right, var(--color-purple-100), var(--color-purple-300));
+    }
+
+    .menu--third-level-list {
+      /* padding: var(--space-3xs) 0 var(--space-3xs) 0; */
+    }
+  }
+</style>
+

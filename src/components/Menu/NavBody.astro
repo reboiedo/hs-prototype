@@ -1,0 +1,103 @@
+---
+
+---
+
+<nav id="nav" class="main-nav" hidden>
+  <div class="content">
+    <h1>This is the nav</h1>
+  </div>
+</nav>
+
+
+<script>
+import {gsap} from 'gsap';
+const buttonMenu = document.getElementById('button-menu');
+const mainNav = document.getElementById('nav');
+
+const tl = gsap.to(
+  ".content", 
+  {
+    clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+    duration: 3,
+  }
+);
+
+
+
+
+if (buttonMenu instanceof HTMLElement && mainNav instanceof HTMLElement) {
+  buttonMenu.addEventListener('click', () => {
+    const isExpanded = buttonMenu.getAttribute('aria-expanded') === 'true';
+    buttonMenu.setAttribute('aria-expanded', (!isExpanded).toString());
+    if (!isExpanded) {
+      mainNav.hidden = false;
+      console.log('show');
+
+      tl.play();
+      
+    } else {
+      mainNav.hidden = true;
+      console.log('hide');
+      tl.reverse();
+    }
+  })
+  }
+
+</script>
+
+<style>
+
+.main-nav {
+  position: fixed; /* or fixed, based on your needs */
+  top: 0; /* Aligns the menu below the button */
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: none; /* Hidden by default */
+  transition: transform 0.5s ease-in-out;
+}
+
+.content {
+  position: relative;;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-purple-800);
+  justify-content: center;
+  height: 100%;
+  z-index: 2;
+  padding: var(--space-3xs);
+  color: var(--color-white);
+  overflow: hidden; /* Ensure content is clipped by the mask */
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+}
+
+h1 {
+  color: red;
+}
+
+.mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-color: black;  
+  z-index: 1;
+  transition: transform 0.5s ease-in-out;
+  transform: translateY(100%); /* Start position of the mask */
+}
+
+.main-nav[hidden] {
+  display: none; /* Ensure hidden applies display:none */
+}
+
+.main-nav:not([hidden]) {
+  display: block; /* Make it visible when hidden is removed */
+}
+
+.main-nav:not([hidden]) .mask {
+  transform: translateY(0); /* Slide the mask up to reveal content */
+}
+
+</style>

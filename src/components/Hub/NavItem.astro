@@ -1,0 +1,42 @@
+---
+interface NavItemProps {
+  classes?: string;
+  variant?: 'default' | 'selected';
+  [key: string]: any; // For any additional props
+}
+
+const listVariants = {
+  default: 'list--default',
+  selected: 'list--selected',
+};
+
+const { classes = '', variant = 'default', ...rest } = Astro.props as NavItemProps;
+---
+
+<li>
+  <a href="" class:list={["list", "detail-xs", classes, listVariants[variant]]} {...rest}>
+    <slot/>
+  </a>
+</li>
+
+<style>
+  a {
+    display: flex;
+    color: var(--color-purple-300);
+    text-decoration: none;
+    padding: var(--space-3xs) var(--space-2xs);
+    border-radius: 0px 8px 8px 0px;
+    border-left: 1px solid var(--color-purple-700);
+  }
+
+  a:hover {
+    color: var(--color-white);
+  }
+
+  .list--selected {
+    color: var(--color-white);
+    background-color: var(--color-purple-700);
+    border-left: 1px solid var(--color-white);
+    font-weight: var(--font-bold);
+  }
+</style>

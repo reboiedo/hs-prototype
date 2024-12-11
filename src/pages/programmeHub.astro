@@ -1,0 +1,178 @@
+---
+import { getCollection } from "astro:content";
+import Navigation from "../components/Navigation.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProgrammeListItem from "../components/ProgrammeHub/ProgrammeListItem.astro";
+import { Icon } from "astro-icon/components";
+
+const techProgrammes = await getCollection("programmes", ({data}) => {
+  return data.type === "tech";
+})
+
+const creativeProgrammes = await getCollection("programmes", ({data}) => {
+  return data.type === "creative";
+})
+---
+
+<BaseLayout>
+  <Navigation />
+  <div class="hero">
+    <div class="wrapper">
+      <h1 class="headline-4xl">PROGRAMMES</h1>
+    </div>
+  </div>
+  <div class="filters">
+    <div class="filter-wrapper">
+      <div class="filter-degrees">
+        <div class="degree">Bachelor</div>
+        <div class="degree degree-active">Master</div>
+        <div class="degree">Continuing Studies</div>
+      </div>
+      <div class="filter-campus">
+        <span>All Locations</span>
+        <Icon name="icon--arrow" />
+
+      </div>
+
+    </div>
+  </div>
+  <div class="wrapper">
+    <div class="category">
+      <div class="left">
+        <h2 class="headline-xl category-title">TECHNOLOGY FOCUS</h2>
+      </div>
+      <ul>
+        {
+        techProgrammes.map(({data}) => (
+          <ProgrammeListItem data={data} />
+        ))
+        }
+      </ul>
+    </div>
+    <div class="category">
+      <div class="left">
+        <h2 class="headline-xl category-title">BUSINESS & DESIGN</h2>
+      </div>
+      <ul>
+        {
+        creativeProgrammes.map(({data}) => (
+          <ProgrammeListItem data={data} />
+        ))
+        }
+      </ul>
+    </div>
+  </div>
+
+</BaseLayout>
+
+<style>
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  body {
+    color: var(--color-white);
+    background-color: var(--color-purple-800);
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+  }
+
+  .hero {
+    background-color: var(--color-purple-800);
+    padding-bottom: var(--space-xs);
+    padding-top: var(--space-3xl);
+  }
+
+  .filters {
+    position: sticky;
+    top: 0;
+    background-color: var(--color-purple-800);
+    border-bottom: 1px solid var(--color-purple-700);
+    z-index: 3;
+  }
+
+  .filter-wrapper {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    max-width: 1824px;
+    margin: auto;
+    padding-inline: var(--space-s-m);
+  }
+
+  .filter-campus {
+    display: flex;
+    align-items: center;
+    gap: var(--space-m);
+    color: var(--color-purple-300);
+    font-size: var(--font-size-sm);
+    }
+
+  .filter-degrees {
+    display: flex;
+    gap: var(--space-s);
+
+  }
+
+  .degree {
+    font-size: var(--font-size-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--space-m);
+    padding-block: var(--space-2xs);
+    /* padding-right: var(--space-2xs); */
+    color: var(--color-purple-300);
+  }
+
+  .degree-active {
+    position: relative;
+    color: var(--color-white);
+  }
+
+  .degree-active::after {
+    content: "";
+    width: 100%;
+    height: 3px;
+    border-radius: 2px;
+    background-color: var(--color-white);
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+  }
+
+
+  .wrapper {
+    max-width: 1824px;
+    padding-inline: var(--space-s-m);
+    margin: auto;
+  }
+
+  .category {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    border-top:  1px solid var(--color-purple-700);
+    padding-bottom: var(--space-2xl);
+    }
+
+  .category:first-child {
+      border-top: none;
+    }
+
+
+  .left {
+    width: 1fr;
+    padding-top: var(--space-l);
+  }
+
+  .category-title {
+    position: sticky;
+    top: 88px;
+    /* color: var(--color-purple-300); */
+  }
+
+
+</style>

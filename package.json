@@ -1,0 +1,33 @@
+{
+  "name": "hs-prototype",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/react": "^4.0.0",
+    "@iconify/react": "^5.1.0",
+    "@types/react": "^18.3.14",
+    "@types/react-dom": "^18.3.2",
+    "astro": "^4.16.5",
+    "astro-icon": "^1.1.1",
+    "astro-integration-lottie": "^0.3.1",
+    "astro-tunnel": "^0.1.6",
+    "framer-motion": "^11.13.1",
+    "gsap": "^3.12.5",
+    "lottie-web": "^5.12.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.6.2"
+  },
+  "devDependencies": {
+    "@iconify-json/material-symbols-light": "^1.2.8",
+    "@iconify-json/mdi": "^1.2.1"
+  }
+}

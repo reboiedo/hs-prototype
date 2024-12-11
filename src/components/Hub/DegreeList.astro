@@ -1,0 +1,62 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface DegreeData {
+  title: string;
+  duration: string;
+  description: string;
+  campus: string[];
+}
+
+interface DegreeListProps {
+  data: DegreeData;
+}
+
+const { data } = Astro.props as DegreeListProps;
+const { title, duration, description, campus } = data;
+---
+
+<a href="">
+  <article>
+    <div class="left-list">
+      <div class="list-top">
+        <h2 class="headline-xl">{title}</h2>
+        <p class="body-lg p-700">/</p>
+        <p class="body-lg duration">{duration}</p>
+      </div>
+      <p class="body-md description">{description}</p>
+      <div class="tag-wrapper">
+        {
+          campus.map((camp) => (
+            <div class="tag">{camp}</div>
+          ))
+        }
+      </div>
+    </div>
+    <Icon name="icon--arrow-thin" class="arrow-icon" />
+  </article>
+</a>
+
+<style>
+  a {
+    text-decoration: none;
+    color: var(--color-white);
+  }
+  article {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-l);
+    padding-block: var(--space-m);
+    border-top: 1px solid var(--color-purple-700);
+  }
+
+  /* article:hover {
+    background: linear-gradient(to top, var(--color-purple-800), var(--color-purple-700));
+  } */
+
+  .arrow-icon {
+    width: var(--space-xl);
+    height: var(--space-xl);
+  }
+</style>

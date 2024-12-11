@@ -1,0 +1,70 @@
+---
+import { getCollection } from "astro:content";
+import DegreeList from "../components/Hub/DegreeList.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+import QuickNav from "../components/Hub/QuickNav.astro";
+import Filters from "../components/Hub/Filters.astro";
+import { Icon } from "astro-icon/components";
+import HubHero from "../components/Hub/HubHero.astro";
+import DegreeHorizontal from "../components/Hub/DegreeHorizontal.astro";
+
+const degrees = await getCollection("degrees");
+
+// console.log(degrees);
+---
+
+<BaseLayout>
+  <Navigation />
+
+
+
+
+  <div class="container">
+    <div class="content">
+      <HubHero />
+      <Filters/>
+      <ul>
+        {
+          degrees.map(({data}) => (
+            <DegreeHorizontal data={data} />
+          ))
+        }
+        </ul>
+      </div>
+      <QuickNav />
+  </div>
+<Footer/>
+
+</BaseLayout>
+
+
+<style>
+  body {
+    color: var(--color-white);
+    background-color: var(--color-purple-800);
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-gap);
+    padding-inline: var(--space-s-m);
+    padding-bottom: var(--space-2xl);
+    max-width: 1824px;
+    margin: auto;
+  }
+
+  .content {
+    width: 100%;
+    gap: var(--space-xl);
+  }
+
+
+</style>

@@ -1,0 +1,92 @@
+---
+
+---
+
+<section class="hero"> 
+  <div class="container-hero">
+    <div class="hero-left">
+
+      <div class="top">
+        <h1 class="headline-3xl">Artificial and Machine Intelligence</h1>
+        <p class="body-md">
+          Our Computer Science programme has solid roots in mathematics and engineering, while our innovative department optimises.
+        </p>
+      </div>
+
+      <div class="hero-details">
+        
+        <div class="detail">
+          <p class="body-sm">Barcelona Intake</p>
+          <h3 class="headline-md">Every 3 Weeks</h3>
+        </div>
+
+        <div class="detail">
+          <p class="body-sm">Bangkok Intake</p>
+          <h3 class="headline-md">19 Aug, 2025</h3>
+        </div>
+
+    </div>
+  </div>
+
+  <div class="hero-right">
+  </div>
+</section>
+
+<style>
+
+
+
+.hero {
+    background-color: var(--color-gray-50);
+    /* color: var(--color-white); */
+    border-bottom: 1px solid var(--color-gray-200);
+    padding: var(--space-xl-3xl) var(--space-s-m);
+  }
+
+  .container-hero {
+      max-width: 1824px;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--space-xs);
+      margin: auto;
+      @media screen and (max-width: 810px) {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-xl);
+      }
+    }
+  
+  .hero-left {
+    grid-column: span 6;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xl);
+  }
+
+  .top {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s-m);
+  }
+  
+  .hero-right {
+    width: 100%;
+    max-width: 746px;
+    aspect-ratio: 3/2;
+    background-color: var(--color-gray-200);
+    grid-column: 8 / span 5;
+  }
+
+.hero-details {
+  display: flex;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+  padding: var(--space-s);
+  border-left: 1px solid var(--color-gray-200);
+}
+
+</style>

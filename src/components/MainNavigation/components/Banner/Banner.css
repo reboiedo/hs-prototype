@@ -1,0 +1,28 @@
+.announcement-banner {
+  height: 40px;
+  background-color: var(--color-purple-900);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+  padding: 0 var(--space-s-m);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1002;
+  transform: translateY(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  border-bottom: 1px solid var(--color-purple-700);
+}
+
+.announcement-banner.banner-hidden {
+  transform: translateY(-100%);
+}
+
+.announcement-banner p {
+  margin: 0;
+  text-align: center;
+}

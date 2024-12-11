@@ -1,0 +1,104 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<button class="menu-button" aria-expanded="false">
+  <span class="menu-button__text">Menu</span>
+  <div class="menu-button__dot">
+      <Icon name="mdi:close" class="menu-button__icon menu-button__icon--close"/>
+      <Icon name="mdi:menu" class="menu-button__icon menu-button__icon--menu"/>
+
+  </div>
+</button>
+
+<script>
+  import { gsap } from 'gsap';
+
+const tlClick = gsap.timeline({ paused: true })
+  .to('.menu-button', { width: 64, padding: 0, duration: 0.4, ease: 'expo.in' }, 0)
+  .to('.menu-button__text', { opacity: 0, x: 40, width: 0, duration: 0.3, ease: 'expo.in' }, 0)
+  .to('.menu-button__dot', { width: 64, height: 64, duration: 0.4, ease: 'expo.in' }, 0)
+  .to('.menu-button__icon--menu', { opacity: 0, y: -40, duration: 0.6, ease: 'back.out' }, 0)
+  .from('.menu-button__icon--close', { opacity: 0, y: 40, duration: 0.6, ease: 'back.out' }, 0);
+
+const tlHover = gsap.timeline({ paused: true })
+  .to('.menu-button', { paddingRight: 8, paddingLeft: 16, duration: 0.6, ease: 'power2.inOut' })
+  .to('.menu-button__dot', { width: 48, height: 48, duration: 0.6, ease: 'power2.inOut' }, 0)
+  .to('.menu-button__text', { x: -12, duration: 0.6, ease: 'power2.inOut' }, 0)
+  .from('.menu-button__icon--menu', { y: 40, opacity: 0 } , 0)
+
+const button = document.querySelector('.menu-button');
+
+if (button) {
+  button.addEventListener('click', () => {
+    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', (!isExpanded).toString());
+    if (isExpanded) {
+      tlClick.reverse();
+    } else {
+      tlClick.play();
+    }
+  });
+
+  button.addEventListener('mouseenter', () => { tlHover.play(); });
+  button.addEventListener('mouseleave', () => {
+    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+    if (!isExpanded) { tlHover.reverse(); }
+  });
+}
+</script>
+
+<style>
+
+.menu-button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  height: 64px;
+  width: 128px;
+  border-radius: 100px;
+  position: relative;
+  transition-behavior: allow-discrete;
+  z-index: 100
+}
+
+.menu-button__text {
+  transition-behavior: allow-discrete;
+  position: absolute;
+  left: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.menu-button__dot {
+  height: 8px;
+  width: 8px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-button__icon {
+  color: black;
+  font-size: 20px;
+  minimum-width: 20px;
+  position: absolute;
+ 
+  
+}
+
+
+
+</style>

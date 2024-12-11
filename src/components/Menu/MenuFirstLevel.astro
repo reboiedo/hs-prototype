@@ -1,0 +1,118 @@
+---
+import { Icon } from "astro-icon/components";
+
+const {title, order, isActive=false, controls, ...rest } = Astro.props; 
+---
+
+<button class="menu--item-header headline-3xl" aria-expanded="false" {...rest} >
+  <span class="body-xs order">{order}</span>
+  <span class="title">{title}</span>
+  <Icon name="mdi:arrow-right-thin" class="arrow-icon" />
+  <div class="border-bottom"></div>
+</button>
+
+<script>
+import { gsap } from "gsap";
+  const dropdown = document.querySelectorAll('.menu--item-header');
+
+  dropdown.forEach(item => {
+    const tl = gsap
+    .timeline({paused: true})
+    .to(item, { 
+      backgroundImage: "linear-gradient(90deg, var(--left) 0%, var(--left) 100% , var(--right) 100%)", 
+      duration: 0.4, 
+      ease: "power1.out" 
+    }).to(item.querySelector('.title'), {x:10, duration: 0.3, ease: "power1.out"}, 0);
+    console.log(item);
+
+    item.addEventListener("mouseenter", () => tl.play());
+    item.addEventListener("mouseleave", () => tl.reverse());
+  });
+
+</script>
+
+<style>
+
+  :root {
+    --left: var(--color-white);
+    --right: var(--color-purple-500);
+  }
+
+  .menu--item-header {
+    border: none;
+    display: flex;
+    justify-content: flex-end;
+    
+    width: 100%;
+    color: var(--color-purple-500);
+    padding: var(--space-m) var(--space-s-m) var(--space-s) var(--space-s-m);
+    gap: var(--space-xs);
+    background-image: linear-gradient(
+      90deg, 
+      var(--left) 0%, 
+      var(--left) 0%, 
+      var(--right) 0%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  /* .menu--item-header:hover {
+    background-image: linear-gradient(90deg, var(--color-white) 0%, var(--color-white) 100% , var(--color-purple-500) 100%);
+  } */
+
+
+
+  .menu--item-header[aria-expanded="true"] {
+    color: var(--color-white);
+    background-image: linear-gradient(90deg, var(--left) 0%, var(--left) 100% , var(--right) 100%);
+  }
+
+
+
+
+  .title {
+    /* flex: 1; */
+    text-align: left;
+    max-width: 580px;
+  }
+
+  .order{
+    flex: 1;
+    text-align: left;
+  }
+
+
+  .arrow-icon {
+    opacity: 0;
+    /* position: absolute;
+    left: calc(- var(--space-xs))
+    top: 0; */
+    /* transform: translateY(-16%); */
+  }
+
+  @media (min-width: 768px) {
+    .menu--item-header {
+      padding: var(--space-s) 0 var(--space-xs) var(--space-s-m);
+      position: relative;
+      /* border-bottom: 2px solid var(--color-purple-700); */
+    }
+
+    .border-bottom {
+      content: "";
+      width: 100%;
+      height: 2px;
+      background-color: var(--color-purple-700);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .menu--item-header[aria-expanded="true"] .arrow-icon {
+      opacity: 1;
+    }
+  }
+</style>

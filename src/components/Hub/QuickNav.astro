@@ -1,0 +1,64 @@
+---
+import NavItem from "./NavItem.astro";
+
+
+---
+
+
+  <ul>
+    <div class="list-section">
+      <div class="divider headline-2xs">Tech Focus</div>
+      <NavItem>Applied Computer and Data Science</NavItem>
+      <NavItem variant="selected">Computer Science</NavItem>
+      <NavItem>Cyber Security</NavItem>
+      <NavItem>Data Science</NavItem>
+      <NavItem>Front-end Development</NavItem>
+      <NavItem>Machine & Artificial Intelligence</NavItem>
+      <NavItem>Maths as a Second Language</NavItem>
+    </div>
+    <div class="list-section">
+      <div class="divider headline-2xs">Creative Focus</div>
+      <NavItem>Digital Marketing</NavItem>
+      <NavItem>Digital Transformation</NavItem>
+      <NavItem>FinTech</NavItem>
+      <NavItem>High-tech Entrepreneurship</NavItem>
+      <NavItem>Interaction Design</NavItem>
+      <NavItem>International Business</NavItem>
+      <NavItem>Product Management</NavItem>
+    </div>
+  </ul>
+
+  <style>
+    ul {
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      align-self: flex-start;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      padding-block: var(--space-2xl);
+      gap: var(--space-m);
+      margin-top: var(--space-2xl);
+      text-wrap: nowrap;
+    }
+
+    .list-section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .divider {
+      color: var(--color-purple-400);
+      text-transform: uppercase;
+      padding-block: var(--space-2xs);
+    }
+
+    @media (max-width: 1200px) {
+      ul {
+        display: none;
+      }
+    }
+
+  </style>

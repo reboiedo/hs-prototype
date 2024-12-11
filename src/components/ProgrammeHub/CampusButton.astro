@@ -1,0 +1,39 @@
+---
+import { Icon } from "astro-icon/components";
+const {campus} = Astro.props;
+
+---
+
+<a class="campus-button">
+  <span>{campus}</span>
+  <Icon name="material-symbols-light:arrow-outward" />
+</a>
+<style>
+
+  [data-icon] {
+    font-size: 1.5rem;
+    color: var(--color-purple-300);
+  }
+    .campus-button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    border: 1px solid var(--color-purple-600);
+    padding: var(--space-2xs) var(--space-xs);
+    border-radius: 100px;
+
+    
+  }
+  
+  .campus-button:hover {
+    /* background-color: var(--color-purple-700); */
+    border: 1px solid var(--color-white);
+    cursor: pointer;
+
+    [data-icon] {
+      color: var(--color-white)
+    }
+  }
+
+
+</style>

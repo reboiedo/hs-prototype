@@ -1,0 +1,199 @@
+---
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import Navigation from "../components/Navigation.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { animate, stagger } from "motion";
+import MenuSecondLevel from "../components/Menu/MenuSecondLevel.astro";
+import MenuFirstLevel from "../components/Menu/MenuFirstLevel.astro";
+
+const areasOfStudy = await getCollection("programmes");
+
+---
+
+<BaseLayout>
+  <div class="menu">
+    <nav class="menu-top"></nav>
+    <div class="menu-left">
+      <ul>
+        <MenuFirstLevel title="Studies" classes="active" />
+        <MenuFirstLevel title="Admissions" />
+        <MenuFirstLevel title="The School" />
+        <MenuFirstLevel title="Explore" />
+      </ul>
+      <div class="wrapper-secondary-actions">
+        <ul class="secondary-actions">
+          <li class="body-sm menu--secondary-action"><a href="#">Login</a></li>
+          <li class="body-sm menu--secondary-action"><a href="#">Schedule 2024</a></li>
+          <li class="body-sm menu--secondary-action"><a href="#">Contact</a></li>
+        </ul>
+        <ul class="social-icons">
+          <li class="social-icon"><a href="#"><Icon name="mdi:instagram"/></a></li>
+          <li class="social-icon"><a href="#"><Icon name="mdi:youtube"/></a></li>
+          <li class="social-icon"><a href="#"><Icon name="mdi:facebook"/></a></li>
+          <li class="social-icon"><a href="#"><Icon name="mdi:spotify"/></a></li>
+        </ul>
+      </div>
+    </div>
+      <ul class="menu--category-wrapper">
+        <MenuSecondLevel title="Testing" third="true"/>
+        <MenuSecondLevel title="Bachelors"/>
+        <MenuSecondLevel title="Masters"/>
+        <MenuSecondLevel title="Foundation Year"/>
+        <MenuSecondLevel title="Open University"/>
+      </ul>
+      <ul class="menu--category-wrapper">
+        <MenuSecondLevel title="How to Apply"/>
+        <MenuSecondLevel title="Scholarships"/>
+        <MenuSecondLevel title="Work & Study Opportunities"/>
+        <MenuSecondLevel title="Contact Admissions"/>
+        <MenuSecondLevel title="Book a Visit"/>
+        <MenuSecondLevel title="Apply now"/>
+      </ul>
+      <ul class="menu--category-wrapper">
+        <MenuSecondLevel title="About Harbour.Space"/>
+        <MenuSecondLevel title="Faculty"/>
+        <MenuSecondLevel title="Barcelona Campus"/>
+        <MenuSecondLevel title="Bangkok Campus"/>
+        <MenuSecondLevel title="Alumni"/>
+        <MenuSecondLevel title="Sobre Nosotros"/>
+        <MenuSecondLevel title="Sobre Nosaltres"/>
+      </ul>
+      <ul class="menu--category-wrapper">
+        <MenuSecondLevel title="Blog"/>
+        <MenuSecondLevel title="Podcast"/>
+        <MenuSecondLevel title="FAQ"/>
+        <MenuSecondLevel title="Leagues of Code"/>
+      </ul>
+    </div>
+</BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const firstLevelMenu = document.querySelectorAll('.menu--first-level');
+    const menuCategoryWrappers = document.querySelectorAll('.menu--category-wrapper');
+
+    // Hide all category wrappers by default
+    menuCategoryWrappers.forEach(wrapper => wrapper.classList.remove('visible'));
+
+    firstLevelMenu.forEach((menuItem, index) => {
+      menuItem.addEventListener('click', () => {
+        firstLevelMenu.forEach(item => item.classList.remove('active'));
+        menuItem.classList.add('active');
+
+        menuCategoryWrappers.forEach(wrapper => wrapper.classList.remove('visible'));
+        menuCategoryWrappers[index].classList.add('visible');
+      });
+    });
+
+    // Set the first category wrapper as visible on page load
+    if (menuCategoryWrappers.length > 0) {
+      menuCategoryWrappers[0].classList.add('visible');
+    }
+  });
+</script>
+
+<style>
+  
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .menu {
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: 72px 1fr;
+    grid-template-columns: 1fr 1.5fr;
+    grid-template-areas:
+      "menu-top menu-top"
+      "menu-left menu-right";
+    position: fixed;
+    width: 100%;
+    height: 100dvh; /* Ensure the menu has a fixed height */
+    background-color: var(--color-purple-800);
+  }
+
+  .menu-top {
+    grid-area: menu-top;
+    display: flex;
+    height: 72px;
+    border-bottom: 1px solid var(--color-purple-700);
+  }
+
+  .menu-left {
+    grid-area: menu-left;
+    display: flex;
+    justify-self: right;
+    padding: var(--space-l) var(--space-xl);
+    flex-direction: column;
+    list-style-type: none;
+    height: 100%;
+    justify-content: space-between;
+    border-right: 1px solid var(--color-purple-700);
+    overflow-y: scroll;
+  }
+
+  .menu-right {
+    grid-area: menu-right;
+    display: flex;
+    padding: var(--space-l) var(--space-xl);
+    flex-direction: column;
+    list-style-type: none;
+    height: 100%;
+    justify-content: space-between;
+    overflow-y: scroll;
+  }
+
+
+  .wrapper-secondary-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+    padding-top: var(--space-xl);
+  }
+
+  .menu--secondary-action {
+    padding: var(--space-3xs) 0;
+    color: var(--color-purple-400);
+  }
+
+
+  .social-icons {
+    display: flex;
+    gap: var(--space-2xs);
+  }
+
+  .social-icon {
+    display: flex;
+    padding: var(--space-2xs);
+    border-radius: 100%;
+    border: 1px solid var(--color-purple-700);
+    color: white;
+  }
+
+  .menu--category-wrapper {
+    display: none;
+    grid-area: menu-right;
+    padding: var(--space-l) var(--space-xl);
+    flex-direction: column;
+    list-style-type: none;
+    height: 100%;
+    justify-content: space-between;
+    overflow-y: scroll;
+  }
+
+  .menu--category-wrapper.visible {
+    display: block;
+  }
+
+  .menu--category-wrapper.visible .menu--sub-item {
+    display: flex; /* Show sub-items when the category is visible */
+  }
+  
+</style>

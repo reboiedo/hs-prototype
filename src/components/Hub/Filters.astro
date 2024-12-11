@@ -1,0 +1,44 @@
+---
+
+---
+
+<div class="filters">
+  <!-- <span class="headline-2xs color-purple-400">MODES OF STUDY</span> -->
+  <div class="filter-group">
+    <div class="filter filter-active">All Campus</div>
+    <div class="filter">Barcelona</div>
+    <div class="filter">Bangkok</div>
+  </div>
+</div>
+
+<style>
+  .filters {
+    display: flex;
+    background-color: var(--color-purple-800);
+    gap: var(--space-xs);
+    justify-content: space-between;
+    align-items: center;
+    /* border-bottom: 1px solid var(--color-purple-700); */
+    padding-bottom: var(--space-xs);
+    position: relative;
+    top: 0;
+  }
+
+  .filter-group {
+    display: flex;
+    gap: var(--space-3xs);
+  }
+
+  .filter {
+    font-size: var(--font-size-sm);
+    border: 1px solid var(--color-purple-600);
+    padding: var(--space-3xs) var(--space-2xs);
+    border-radius: 100px;
+  }
+
+  .filter-active {
+    background-color: var(--color-purple-600);
+    border-color: var(--color-purple-600);
+  }
+
+</style>
